@@ -1,0 +1,96 @@
+<core:FragmentDefinition xmlns="sap.ui.table" xmlns:core="sap.ui.core" xmlns:m="sap.m">
+	<m:Dialog title="Auszahlungsdetails" afterClose="onDialogCloseEscape">
+		<!--<Table noDataText="Keine Einträge gefunden"
+			items="{ path : 'belegeSet>/', sorter : { path : 'Opbel', descending : false } }">
+			<ColumnListItem>
+				<cells>
+					<Text text="{belegeSet>Betrag}"/>
+					<Text text="{belegeSet>Augbl}"/>
+					<Text text="{belegeSet>Leistungsart}"/>
+					<Text text="{belegeSet>Opbel}"/>
+					<Text text="{belegeSet>Ordnr}"/>
+					<Text text="{belegeSet>Verwendungszweck}"/>
+				</cells>
+			</ColumnListItem>
+			<columns>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Betrag"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Ausgleichsbelegnummer"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Leistungsart"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Belegnummer"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Anordnungsnummer"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Verwendungszweck"/>
+				</Column>
+			</columns>
+		</Table>-->
+		<Table id="belegeTableId" noData="Keine Einträge gefunden"&nbsp;
+		selectionMode="None"
+		visibleRowCountMode="Fixed"
+		rows="{ path : 'belegeSet>/', sorter : { path : 'Opbel', descending : false } }">
+				<columns>
+					<Column>
+						<m:Label text="Betrag" />
+						<template>
+							<m:Text text="{belegeSet>Betrag}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Leistungsart" />
+						<template>
+							<m:Text text="{belegeSet>Leistungsart}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Verwendungszweck" />
+						<template>
+							<m:Text text="{belegeSet>Verwendungszweck}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Anordnungsnummer" />
+						<template>
+							<m:Text text="{belegeSet>Ordnr}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Belegnummer" />
+						<template>
+							<m:Text text="{belegeSet>Opbel}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Ausgleichsbelegnummer" />
+						<template>
+							<m:Text text="{belegeSet>Augbl}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Erfassungsdatum Rückläufer" />
+						<template>
+							<m:Text text="{belegeSet>ErfassungsdatumRl}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Fälligkeitsdatum Rückläufer" />
+						<template>
+							<m:Text text="{belegeSet>FaelligkeitsdatumRl}" wrapping="false" />
+						</template>
+					</Column>
+				</columns>
+			</Table>
+		<m:buttons>
+			<m:Button visible="{dialogModel>/buttonVisible}" text="Antrag Nachforschung" press="runInvestigationRequestUrl" type="Default"/>
+			<m:Button text="Schließen" press="onDialogCloseButton" type="Reject" />
+		</m:buttons>
+	</m:Dialog>
+</core:FragmentDefinition>

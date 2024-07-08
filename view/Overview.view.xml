@@ -1,0 +1,124 @@
+<mvc:View controllerName="ZF05_E187_PAYM_OVERVIEW.controller.Overview" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:t="sap.ui.table" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.f" xmlns:cards="sap.f.cards" xmlns:commons="sap.suite.ui.commons" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
+	<App autoFocus="false">
+		<pages>
+			<Page title="{i18n>appTitle}" showNavButton="true" navButtonPress="onBack">
+				<content>
+					<VBox width="100%" height="95%">
+						<form:SimpleForm id="idForm" layout="ResponsiveGridLayout" columnsXL="3" columnsL="3" columnsM="3" singleContainerFullSize="false"
+							editable="true" width="100%">
+							<form:content>
+								<core:Title text="Kundendaten"/>
+								<Label text="Kundennummer" labelFor="stepKdnrId"/>
+								<Input id="stepKdnrId" editable="false" class="inputDurchsichtig"/>
+								<Label text="Geschäftspartnernummer" labelFor="gpartId" wrapping="true"/>
+								<Input id="gpartId" editable="false"/>
+								<Label text="Straße" labelFor="adresse1Id"/>
+								<Input id="adresse1Id" editable="false"/>
+								<Label text="Ort" labelFor="adresse2Id" visible="true"/>
+								<Input id="adresse2Id" editable="false"/>
+								<core:Title text="Bankverbindungen"/>
+								<Label text="IBAN" labelFor="ibanId"/>
+								<Input id="ibanId" editable="false"/>
+								<Label text="Institut" labelFor="institutId"/>
+								<Input id="institutId" editable="false"/>
+								<Label text=""/>
+								<Button id="idBankverbBtn" icon="sap-icon://list" tooltip="Alle Bankverbindungen anzeigen" press="onBankv"
+									text="Alle Bankverbindungen anzeigen"/>
+								<core:Title text="Letzte Aktivitäten"/>
+								<Label id="letzteAuszahlungLabel" text="Letzte Auszahlung"/>
+								<Input id="letzteAuszahlungBetrag" editable="false" ariaLabelledBy="barrierefreiheitLetzteAuszahlungBetrag"/>
+								<Input id="letzteAuszahlungDatum" editable="false" ariaLabelledBy="barrierefreiheitLetzteAuszahlungDatum"/>
+								<Label id="letzteEinzahlungLabel" text="Letzte Einzahlung"/>
+								<Input id="letzteEinzahlungBetrag" editable="false" ariaLabelledBy="barrierefreiheitLetzteEinzahlungBetrag"/>
+								<Input id="letzteEinzahlungDatum" editable="false" ariaLabelledBy="barrierefreiheitLetzteEinzahlungDatum"/>
+								<Label text=""/>
+								<Button icon="sap-icon://list" tooltip="Historie und Status Nachforschungsantrag" press="displayHistory"
+									text="Historie und Status Nachforschungsantrag"/>
+							</form:content>
+						</form:SimpleForm>
+						<FlexBox class="sapUiSmallMarginBegin sapUiSmallMarginTop bankverWarn">
+							<MessageStrip id="idMessageBankv" showIcon="true" type="Warning" showCloseButton="true" class="sapUiSmallMarginEnd"/>
+							<MessageStrip id="idMessageArchiv" showIcon="true" type="Warning" showCloseButton="true" text="{i18n>belegeArchiviert}"/>
+						</FlexBox>
+						<c:InvisibleText id="barrierefreiheitLetzteAuszahlungBetrag" text="{i18n>barrierefreiheitLetzteAuszahlungBetrag}"/>
+						<c:InvisibleText id="barrierefreiheitLetzteAuszahlungDatum" text="{i18n>barrierefreiheitLetzteAuszahlungDatum}"/>
+						<c:InvisibleText id="barrierefreiheitLetzteEinzahlungBetrag" text="{i18n>barrierefreiheitLetzteEinzahlungBetrag}"/>
+						<c:InvisibleText id="barrierefreiheitLetzteEinzahlungDatum" text="{i18n>barrierefreiheitLetzteEinzahlungDatum}"/>
+						<table:Table id="tableId" noData="Keine Einträge gefunden" selectionMode="None" visibleRowCountMode="Fixed"
+							title="Übersicht der letzten Auszahlungen" rows="{ path : 'auszahlungSet>/'}" rowActionCount="1" enableCellFilter="true"
+							class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+							<table:columns>
+								<table:Column defaultFilterOperator="Contains" filterProperty="Status" sortProperty="Status" width="12rem">
+									<Label text="Status"/>
+									<table:template>
+										<Text text="{auszahlungSet>Status}" maxLines="2"/>
+									</table:template>
+								</table:Column>
+								<table:Column defaultFilterOperator="Contains" filterProperty="Art" sortProperty="Art">
+									<Label text="Art"/>
+									<table:template>
+										<Text text="{auszahlungSet>Art}" maxLines="2"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="8rem">
+									<Label text="Buchungsdatum"/>
+									<table:template>
+										<Text text="{auszahlungSet>Buchungsdatum}" wrapping="false"/>
+									</table:template>
+								</table:Column>
+								<table:Column defaultFilterOperator="Contains" filterProperty="Leistungsart" sortProperty="Leistungsart" width="15rem">
+									<Label text="Leistungsart"/>
+									<table:template>
+										<Text text="{auszahlungSet>Leistungsart}" maxLines="2"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="10rem">
+									<Label text="Geplante Gutschrift / Zustellung am" wrapping="true"/>
+									<table:template>
+										<Text text="{auszahlungSet>Gutschriftsdatum}" wrapping="false"/>
+									</table:template>
+								</table:Column>
+								<table:Column hAlign="Right" width="10rem">
+									<Label text="Zahlbetrag"/>
+									<table:template>
+										<Text text="{auszahlungSet>Gutschriftsbetrag}" wrapping="false" textAlign="End"/>
+									</table:template>
+								</table:Column>
+								<table:Column defaultFilterOperator="Contains" filterProperty="Ausnahmegrund" sortProperty="Ausnahmegrund">
+									<Label text="Ausnahmegrund"/>
+									<table:template>
+										<Text text="{auszahlungSet>Ausnahmegrund}" maxLines="2"/>
+									</table:template>
+								</table:Column>
+								<table:Column defaultFilterOperator="Contains" filterProperty="Empfaengername" sortProperty="Empfaengername">
+									<Label text="Empfänger/-in"/>
+									<table:template>
+										<Text
+											text="{=${auszahlungSet>Empfaengername} === '' ? '' : ${auszahlungSet>Empfaengername} + ' (' + ${auszahlungSet>Empfaengerbpext} +')'}"
+											maxLines="2"/>
+									</table:template>
+								</table:Column>
+								<table:Column defaultFilterOperator="Contains" filterProperty="Empfaengeriban" sortProperty="Empfaengeriban" width="14rem">
+									<Label text="Empfängerbankverbindung"/>
+									<table:template>
+										<Text
+											text="{=${auszahlungSet>Empfaengeriban} === '' ? '' : ${auszahlungSet>Empfaengeriban} + ' (' + ${auszahlungSet>Empfaengerbanka} +')'}"
+											maxLines="2"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="5rem">
+									<Label text="Details"/>
+									<table:template>
+										<Link text="Anzeigen" press="belegAnzeigen($event, ${auszahlungSet>Opbel}, ${auszahlungSet>AuszahlungToBelege}, ${auszahlungSet>Augst})"/>
+									</table:template>
+								</table:Column>
+							</table:columns>
+						</table:Table>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

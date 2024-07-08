@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns="sap.ui.table" xmlns:core="sap.ui.core" xmlns:m="sap.m" xmlns:commons="sap.ui.commons">
+		<m:Dialog title="Auszahlungsdetails" afterClose="onDialogCloseEscape">
+		<Table id="tableId" noData="Keine Einträge gefunden"&nbsp;
+		selectionMode="Single"
+		visibleRowCountMode="Fixed"
+		rowSelectionChange="onConfirm"
+		selectionBehavior="RowOnly"
+		enableCellFilter="true"
+		rows="{ path : 'searchedCandidates>/', sorter : { path : 'Vorname', descending : false } }">
+				<columns>
+					<Column defaultFilterOperator="Contains" filterProperty="StepKunnr" sortProperty="StepKunnr">
+						<m:Label text="Kundennummer" />
+						<template>
+							<m:Text text="{searchedCandidates>StepKunnr}" wrapping="false" />
+						</template>
+					</Column>
+					<Column defaultFilterOperator="Contains" filterProperty="Vorname" sortProperty="Vorname">
+						<m:Label text="Vorname" />
+						<template>
+							<m:Text text="{searchedCandidates>Vorname}" wrapping="false" />
+						</template>
+					</Column>
+					<Column defaultFilterOperator="Contains" filterProperty="Nachname" sortProperty="Nachname">
+						<m:Label text="Nachname" />
+						<template>
+							<m:Text text="{searchedCandidates>Nachname}" wrapping="false" />
+						</template>
+					</Column>
+					<Column defaultFilterOperator="Contains" filterProperty="Geburtsdatum">
+						<m:Label text="Geburtsdatum" />
+						<template>
+							<m:Text text="{searchedCandidates>Geburtsdatum}" wrapping="false" />
+						</template>
+					</Column>
+					<Column defaultFilterOperator="Contains" filterProperty="Ort" sortProperty="Ort">
+						<m:Label text="Ort" />
+						<template>
+							<m:Text text="{searchedCandidates>Ort}" wrapping="false" />
+						</template>
+					</Column>
+					<Column defaultFilterOperator="Contains" filterProperty="Strasse" sortProperty="Strasse">
+						<m:Label text="Straße" />
+						<template>
+							<m:Text text="{searchedCandidates>Strasse}" wrapping="false" />
+						</template>
+					</Column>
+				</columns>
+			</Table>
+		<m:buttons>
+			<m:Button text="Schließen" press="onDialogCloseButton" type="Reject" />
+		</m:buttons>
+	</m:Dialog>
+</core:FragmentDefinition>

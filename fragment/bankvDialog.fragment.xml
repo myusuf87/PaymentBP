@@ -1,0 +1,93 @@
+<core:FragmentDefinition xmlns="sap.ui.table" xmlns:core="sap.ui.core" xmlns:m="sap.m">
+	<m:Dialog title="Bankverbindungen" afterClose="onDialogCloseEscape">
+		<!--<Table noDataText="Keine Einträge gefunden"
+			items="{ path : 'bankvSet>/', sorter : { path : 'Bkvid', descending : true } }">
+			<ColumnListItem>
+				<cells>
+					<Text text="{bankvSet>Bkvid}"/>
+					<Text text="{bankvSet>Iban}"/>
+					<Text text="{bankvSet>Swift}"/>
+					<Text text="{bankvSet>Banka}"/>
+					<Text text="{bankvSet>Koinh}"/>
+					<Text text="{bankvSet>Validfrom}"/>
+					<Text text="{bankvSet>Validto}"/>
+				</cells>
+			</ColumnListItem>
+			<columns>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Bankverbindungs-ID"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="IBAN"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="BIC"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Institut"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Kontoinhaber"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Gültig ab"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Gültig bis"/>
+				</Column>
+			</columns>
+		</Table>-->
+		<Table id="bankvTableId" noData="Keine Einträge gefunden"&nbsp;
+		selectionMode="None"
+		visibleRowCountMode="Fixed"
+		rows="{ path : 'bankvSet>/', sorter : { path : 'Bkvid', descending : true } }">
+				<columns>
+					<Column filterProperty="{bankvSet>Bkvid}" sortProperty="{bankvSet>Bkvid}">
+						<m:Label text="Bankverbindungs-ID" />
+						<template>
+							<m:Text text="{bankvSet>Bkvid}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="IBAN" />
+						<template>
+							<m:Text text="{bankvSet>Iban}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="BIC" />
+						<template>
+							<m:Text text="{bankvSet>Swift}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Institut" />
+						<template>
+							<m:Text text="{bankvSet>Banka}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Kontoinhaber/-in" />
+						<template>
+							<m:Text text="{bankvSet>Koinh}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Gültig ab" />
+						<template>
+							<m:Text text="{bankvSet>Validfrom}" wrapping="false" />
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Gültig bis" />
+						<template>
+							<m:Text text="{bankvSet>Validto}" wrapping="false" />
+						</template>
+					</Column>
+				</columns>
+			</Table>
+		<m:buttons>
+			<m:Button text="Schließen" press="onDialogCloseButton" type="Reject"/>
+		</m:buttons>
+	</m:Dialog>
+</core:FragmentDefinition>

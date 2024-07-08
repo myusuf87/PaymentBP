@@ -1,0 +1,67 @@
+<core:FragmentDefinition xmlns:table="sap.ui.table" xmlns:core="sap.ui.core" xmlns="sap.m">
+    <Dialog title="Historie und Status Nachforschungsantrag" afterClose="onDialogCloseEscape">
+        <table:Table editable="false" id="historyTable" noData="Keine Einträge gefunden" selectionMode="None"
+            visibleRowCountMode="Fixed"
+            rows="{path : 'historyModel>/'}">
+            <table:columns>
+                <table:Column width="8rem">
+                    <Label text="Klärfallnummer"/>
+                    <table:template>
+                        <Text text="{historyModel>Lfdnr}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem">
+                    <Label text="Belegnummer"/>
+                    <table:template>
+                        <Text text="{historyModel>Augbl}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="7rem">
+                    <Label text="Antrag erfasst"/>
+                    <table:template>
+                        <Text
+                            text="{path: 'historyModel>Erdat', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium'}}"
+                            wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="7rem">
+                    <Label text="Belegdatum"/>
+                    <table:template>
+                        <Text
+                            text="{path: 'historyModel>Augvd', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium'}}"
+                            wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem">
+                    <Label text="Ursprungsbetrag"/>
+                    <table:template>
+                        <Text text="{path: 'historyModel>Betrw', formatter: '.formatter.formatBetrag'}" wrapping="false"
+                            textAlign="End"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem">
+                    <Label text="Status Antrag"/>
+                    <table:template>
+                        <Text text="{historyModel>StateText}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem">
+                    <Label text="Ergebnis der Bank"/>
+                    <table:template>
+                        <Text text="{historyModel>NfastatusText}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="13rem">
+                    <Label text="Storno"/>
+                    <table:template>
+                        <Link text="Storno Nachforschungsantrag" visible="{= ${historyModel>State} === '01'}"
+                            press="cancelInvestigationRequest(${historyModel>Lfdnr})"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+        <buttons>
+            <Button text="Schließen" press="onDialogCloseButton" type="Reject"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
